@@ -1,24 +1,35 @@
-# README
+# 万葉課題
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## テーブル設計
 
-Things you may want to cover:
+- Usersテーブル
+  - name
+    - string
+  - password
+    - string
+  - password_digest
+    - string
+  - admin
+    - boolean
 
-* Ruby version
+- Tasksテーブル
+  - name
+    - string
+  - limit
+    - data
+  - priority(enum使用)
+    - integer
+  - status(enum使用)
+    - integer
+  - user_id
+    - integer
 
-* System dependencies
+- Labelsテーブル
+  - name
+    - string
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Labelingテーブル
+  - label_id
+    - integer
+  - task_id
+    - integer
