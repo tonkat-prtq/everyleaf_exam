@@ -15,6 +15,8 @@
 - Tasksテーブル
   - name
     - string
+  - content
+    - text
   - limit
     - data
   - priority(enum使用)
