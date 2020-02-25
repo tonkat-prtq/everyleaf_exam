@@ -3,8 +3,14 @@ table.table.table-hover
     = tag.tr do
       th タスク名
       th 内容
+      th
+      th
+      th
   tbody
   - @tasks.each do |task|
     = tag.tr do
       td = task.name
       td = task.content
+      td = link_to '詳細', task_path(task.id)
+      td = link_to '編集', edit_task_path(task.id)
+      td = link_to '削除', task_path(task.id), method: :delete
