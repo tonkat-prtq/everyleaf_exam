@@ -1,0 +1,10 @@
+= form_with(model:task) do |f|
+
+
+  div.task_name.form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control'
+  div.task_content.form-group
+    = f.label :content
+    = f.text_field :content, class: 'form-control'
+  = f.submit('send', class: 'btn btn-primary btn-lg')
