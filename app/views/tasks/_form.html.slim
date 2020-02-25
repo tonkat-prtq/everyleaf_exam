@@ -1,4 +1,4 @@
-= form_with(model:task) do |f|
+= form_with(model:task, local:true) do |f|
 
 
   div.task_name.form-group
@@ -7,4 +7,4 @@
   div.task_content.form-group
     = f.label :content
     = f.text_field :content, class: 'form-control'
-  = f.submit('send', class: 'btn btn-primary btn-lg')
+  = f.submit('send', class: 'btn btn-primary')
