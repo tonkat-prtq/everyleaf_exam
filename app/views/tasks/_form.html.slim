@@ -2,9 +2,9 @@
 
 
   div.task_name.form-group
-    = f.label :name
-    = f.text_field :name, class: 'form-control'
+    = f.label :name, "タスク名"
+    = f.text_field :name, placeholder: "タスク名", class: 'form-control'
   div.task_content.form-group
-    = f.label :content
-    = f.text_field :content, class: 'form-control'
-  = f.submit('send', class: 'btn btn-primary')
+    = f.label :content, "タスク詳細"
+    = f.text_field :content, placeholder: "タスク詳細", class: 'form-control'
+  = f.submit(class: 'btn btn-primary')
