@@ -11,7 +11,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     if @task.save
-      redirect_to root_path, flash: {success: "タスクを登録しました"}
+      redirect_to task_path(@task.id), flash: {success: "タスクを登録しました"}
     else
       render :new
     end
