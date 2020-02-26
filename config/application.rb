@@ -19,10 +19,10 @@ module EveryleafExam
       g.jbuilder false
       g.test_framework :rspec,
         model_specs: true,
-        view_specs: false,
-        helper_specs: false,
-        routing_specs: false,
-        controller_specs: false,
+        view_specs: false, # viewSpecを作成しない
+        helper_specs: false, # helperFile用のspecを作成しない
+        routing_specs: false, # routes.rb用のspecを作成しない
+        controller_specs: false, # controller用のspecを作成しない
         request_specs: false
     end
   end
