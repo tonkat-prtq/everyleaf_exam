@@ -1,14 +1,10 @@
 ja:
   tasks:
     index:
-      index_title: 'タスク一覧'
-      created_at: '作成日時'
-      name: 'タスク名'
-      content: '内容'
-      show: '詳細'
-      edit: '編集'
-      destroy: '削除'
-      new: '新規タスク作成'
-    form:
-      name: 'タスク名'
-      content: '内容'
+      title: タスク一覧
+    new:
+      title: 新規作成
+    edit:
+      title: 編集
+    show:
+      title: 詳細
