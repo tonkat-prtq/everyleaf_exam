@@ -1,17 +1,18 @@
-h1 = t '.index_title'
+h1 = t '.title' 
+/ ここはlazy lookupで呼び出し
 table.table.table-hover
   thead.thead-default
     = tag.tr do
-      th = t '.name'
-      th = t '.content'
-      th = t '.show'
-      th =
+      th = t 'common.tasks.name'
+      th = t 'common.tasks.content'
+      th
+      th
       th
   tbody
   - @tasks.each do |task|
     = tag.tr do
       td = task.name
       td = task.content
-      td = link_to t('.show'), task_path(task.id)
-      td = link_to t('.edit'), edit_task_path(task.id)
-      td = link_to t('.destroy'), task_path(task.id), method: :delete
+      td = link_to t('common.tasks.show'), task_path(task.id)
+      td = link_to t('common.tasks.edit'), edit_task_path(task.id)
+      td = link_to t('common.tasks.destroy'), task_path(task.id), method: :delete

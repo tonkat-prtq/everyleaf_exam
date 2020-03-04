@@ -1,10 +1,9 @@
 = form_with(model:task, local:true) do |f|
 
-
   div.task_name.form-group
-    = f.label :name, t('.name')
-    = f.text_field :name, placeholder: t('.name'), class: 'form-control'
+    = f.label :name
+    = f.text_field :name, placeholder: Task.human_attribute_name(:name), class: 'form-control'
   div.task_content.form-group
-    = f.label :content, t('.content')
-    = f.text_field :content, placeholder: t('.content'), class: 'form-control'
+    = f.label :content
+    = f.text_field :content, placeholder: Task.human_attribute_name(:content), class: 'form-control'
   = f.submit(class: 'btn btn-primary')
