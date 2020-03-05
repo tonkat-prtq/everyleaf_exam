@@ -41,7 +41,7 @@
 1. Herokuでcreate new app
 1. Connect GitHubでGitHubと連携
 1. Manual Deployでブランチを選択しデプロイ(pumaでエラー吐いたのでバージョンあげた)
-1. Consoleでheroku run rails db:migrate(自動pushはstep2の合格をもらったら実装します)
+1. Consoleでheroku run rails db:migrate(自動pushはmasterブランチにかけたいのでstep2の合格をもらったら実装します)
 
 ### Basic認証
 
