@@ -12,4 +12,7 @@
   div.task_content.form-group
     = f.label :content
     = f.text_field :content, placeholder: Task.human_attribute_name(:content), class: 'form-control'
+  div.task_deadline.form-group
+    = f.label :deadline
+    = f.datetime_field :deadline, placeholder: Task.human_attribute_name(:deadline), class: 'form-control'
   = f.submit(class: 'btn btn-primary')
