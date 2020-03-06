@@ -6,7 +6,7 @@ RSpec.describe 'Tasks', type: :model do
   end
 
   describe 'taskのバリデーション' do
-    it 'nameとcontentどちらも空文字ではなければOK' do
+    it 'name,content,deadlineがどれも空文字ではなければOK' do
       expect(@task.valid?).to eq(true)
     end
 
@@ -19,6 +19,12 @@ RSpec.describe 'Tasks', type: :model do
       @task.content = ''
       expect(@task.valid?).to eq(false)
     end
+
+    it 'deadlineが空だとNG' do
+      @task.deadline = ''
+      expect(@task.valid?).to eq(false)
+    end
+
   end
 end
 
