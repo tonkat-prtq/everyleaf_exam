@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Tasks', type: :system do
+RSpec.describe 'Tasks', type: :model do
   before do
     @task = build(:task)
   end

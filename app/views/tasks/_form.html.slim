@@ -1,10 +1,15 @@
 = form_with(model:task, local:true) do |f|
-
+  - if task.errors.any?
+    div#error_explanation
+      h2 #{task.errors.count}件のエラーがあります。
+      ul
+      - task.errors.full_messages.each do |msg|
+        li #{msg}
 
   div.task_name.form-group
-    = f.label :name, "タスク名"
-    = f.text_field :name, placeholder: "タスク名", class: 'form-control'
+    = f.label :name
+    = f.text_field :name, placeholder: Task.human_attribute_name(:name), class: 'form-control'
   div.task_content.form-group
-    = f.label :content, "タスク詳細"
-    = f.text_field :content, placeholder: "タスク詳細", class: 'form-control'
+    = f.label :content
+    = f.text_field :content, placeholder: Task.human_attribute_name(:content), class: 'form-control'
   = f.submit(class: 'btn btn-primary')
