@@ -12,6 +12,17 @@
   div.task_content.form-group
     = f.label :content
     = f.text_field :content, placeholder: Task.human_attribute_name(:content), class: 'form-control'
+  div.task_status.form-group
+    = f.label :status
+    div.radio_inline
+      = f.radio_button :status, Task.human_attribute_name(:waiting)
+      = t('common.tasks.waiting')
+    div.radio_inline
+      = f.radio_button :status, Task.human_attribute_name(:working)
+      = t('common.tasks.working')
+    div.radio_inline
+      = f.radio_button :status, Task.human_attribute_name(:completed)
+      = t('common.tasks.completed')
   div.task_deadline.form-group
     = f.label :deadline
     = f.datetime_field :deadline, placeholder: Task.human_attribute_name(:deadline), class: 'form-control'
