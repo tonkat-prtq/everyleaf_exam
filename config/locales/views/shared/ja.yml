@@ -4,6 +4,10 @@ ja:
       name: タスク名
       content: 内容
       deadline: 期限
+      status: ステータス
+      waiting: 未着手
+      working: 着手
+      completed: 完了
       show: 詳細
       edit: 編集
       destroy: 削除
