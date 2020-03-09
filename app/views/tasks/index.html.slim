@@ -1,5 +1,16 @@
 h1 = t '.title' 
 / ここはlazy lookupで呼び出し
+
+= form_with(method: :get, local: true, url: tasks_path) do |f|
+  = f.label :name_search, "タスク名で検索", value: params[:name]
+  = f.search_field :name, class: 'form-control'
+
+  = f.label :status_search, "ステータスで検索", value: params[:status]
+  = f.select :status, [Task.human_attribute_name(:waiting), Task.human_attribute_name(:working), Task.human_attribute_name(:completed)], class: 'form-control', include_blank: true, selected: ''
+
+  = f.hidden_field :search, value: true
+  = f.submit(class: 'btn')
+
 table.table.table-hover
   thead.thead-default
     = tag.tr do
