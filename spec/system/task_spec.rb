@@ -1,4 +1,9 @@
 require 'rails_helper'
+require 'selenium-webdriver'
+driver = Selenium::WebDriver.for :chrome
+
+# :timeoutオプションは秒数を指定している。この場合は100秒
+wait = Selenium::WebDriver::Wait.new(:timeout => 100) 
 
 RSpec.describe 'Tasks', type: :system do
   before do
@@ -7,6 +12,13 @@ RSpec.describe 'Tasks', type: :system do
   end
 
   describe 'タスク一覧画面' do
+
+    let(:task_array){
+      task_list = all('.task_row')
+      expect(task_list[0]).to have_content 'new_test_task'
+      expect(task_list[1]).to have_content 'TEST_TASK'
+    }
+
     context 'タスクを作成した場合' do
       it '作成済みのタスクが表示されること' do
         visit root_path
@@ -17,9 +29,7 @@ RSpec.describe 'Tasks', type: :system do
     context '複数のタスクを作成した場合' do
       it 'タスクが作成日時の降順に並んでいること' do
         visit tasks_path
-        task_list = all('.task_row')
-        expect(task_list[0]).to have_content 'new_test_task'
-        expect(task_list[1]).to have_content 'TEST_TASK'
+        task_array
       end
     end
 
@@ -27,9 +37,7 @@ RSpec.describe 'Tasks', type: :system do
       it 'タスクが期限日の降順に並び替えられること' do
         visit tasks_path
         click_on '期限'
-        task_list = all('.task_row')
-        expect(task_list[0]).to have_content 'new_test_task'
-        expect(task_list[1]).to have_content 'TEST_TASK'
+        task_array
       end
     end
   end
