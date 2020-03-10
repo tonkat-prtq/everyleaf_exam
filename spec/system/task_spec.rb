@@ -13,23 +13,25 @@ RSpec.describe 'Tasks', type: :system do
 
   describe 'タスク一覧画面' do
 
-    let(:task_array){
+    let(:set_task){
       task_list = all('.task_row')
-      expect(task_list[0]).to have_content 'new_test_task'
-      expect(task_list[1]).to have_content 'TEST_TASK'
     }
 
     context 'タスクを作成した場合' do
       it '作成済みのタスクが表示されること' do
         visit root_path
-        expect(page).to have_content 'TEST_CONTENT'
+        expect(page).to have_text 'TEST_CONTENT'
       end
     end
 
     context '複数のタスクを作成した場合' do
       it 'タスクが作成日時の降順に並んでいること' do
         visit tasks_path
-        task_array
+        set_task
+        within('tbody') do
+          expect(page).to have_text /.*new_test_task.*TEST_TASK.*/m
+          # mオプションは、ドットが改行にもマッチするオプション（複数行オプション）
+        end
       end
     end
 
@@ -37,7 +39,11 @@ RSpec.describe 'Tasks', type: :system do
       it 'タスクが期限日の降順に並び替えられること' do
         visit tasks_path
         click_on '期限'
-        task_array
+        set_task
+        within('tbody') do
+          expect(page).to have_text /.*new_test_task.*TEST_TASK.*/m
+          # mオプションは、ドットが改行にもマッチするオプション（複数行オプション）
+        end
       end
     end
   end
@@ -61,7 +67,7 @@ RSpec.describe 'Tasks', type: :system do
         # clickで登録されたはずの情報が、タスク詳細ページに表示されているかを確認する
         # （タスクが登録されたらタスク詳細画面に遷移されるという前提）
         # 5.タスク詳細ページに、テストコードで作成したはずのデータ（記述）がhave_contentされているか（含まれているか）を確認（期待）するコードを書く
-        expect(page).to have_content 'タスクを登録しました'
+        expect(page).to have_text 'タスクを登録しました'
       end
     end
   end
@@ -70,7 +76,7 @@ RSpec.describe 'Tasks', type: :system do
     context '任意のタスク詳細画面に遷移した場合' do
       it '該当タスクの内容が表示されたページに遷移すること' do
         visit task_path(@task.id)
-        expect(page).to have_content "#{@task.name}", "#{@task.content}"
+        expect(page).to have_text "#{@task.name}", "#{@task.content}"
       end
     end
   end
