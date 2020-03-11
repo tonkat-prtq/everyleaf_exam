@@ -1,4 +1,4 @@
-h1 = t '.title' 
+h1 = link_to t('.title'), root_path, class: 'text-decoration-none'
 / ここはlazy lookupで呼び出し
 
 = form_with(method: :get, local: true, url: tasks_path) do |f|
@@ -9,7 +9,7 @@ h1 = t '.title'
   = f.select :status, [Task.human_attribute_name(:waiting), Task.human_attribute_name(:working), Task.human_attribute_name(:completed)], class: 'form-control', include_blank: true, selected: ''
 
   = f.hidden_field :search, value: true
-  = f.submit(class: 'btn')
+  div.search_button = f.submit("検索", class: 'btn btn-secondary')
 
 table.table.table-hover
   thead.thead-default

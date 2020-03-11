@@ -4,19 +4,25 @@ class TasksController < ApplicationController
     if params[:sort]
       @tasks = Task.all.order(params[:sort])
     else
-      @tasks = Task.all.order(created_at: "DESC")
+      @tasks = Task.all.desc
     end
+
+    # if params[:search]
+    #   if params[:name].empty? && params[:status].empty?
+    #     @tasks = Task.all
+    #   elsif params[:name].empty? && params[:status]
+    #     @tasks = Task.where('status = ?', "#{params[:status]}")
+    #   elsif params[:name] && params[:status].empty?
+    #     @tasks = Task.where('name LIKE ?', "%#{params[:name]}%")
+    #   else
+    #     @tasks = Task.where("name LIKE ? and status = ?", "%#{params[:name]}%", "#{params[:status]}")
+    #   end
+    # end
+
     if params[:search]
-      if params[:name].empty? && params[:status].empty?
-        @tasks = Task.all
-      elsif params[:name].empty? && params[:status]
-        @tasks = Task.where('status = ?', "#{params[:status]}")
-      elsif params[:name] && params[:status].empty?
-        @tasks = Task.where('name LIKE ?', "%#{params[:name]}%")
-      else
-        @tasks = Task.where("name LIKE ? and status = ?", "%#{params[:name]}%", "#{params[:status]}")
-        puts "ここだよ"
-      end
+      @tasks = Task.search(params[:name],params[:status])
+    else
+      @tasks = Task.all
     end
   end
 
