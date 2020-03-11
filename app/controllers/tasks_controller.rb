@@ -4,7 +4,7 @@ class TasksController < ApplicationController
     if params[:sort]
       @tasks = Task.all.order(params[:sort])
     else
-      @tasks = Task.all.desc
+      @tasks = Task.all.default_order
     end
 
     # if params[:search]
@@ -19,11 +19,9 @@ class TasksController < ApplicationController
     #   end
     # end
 
-    if params[:search]
-      @tasks = Task.search(params[:name],params[:status])
-    else
-      @tasks = Task.all
-    end
+    @tasks = @tasks
+      .search_with_name(params[:name])
+      .search_with_status(params[:status])
   end
 
   def new
