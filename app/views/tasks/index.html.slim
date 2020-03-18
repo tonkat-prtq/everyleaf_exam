@@ -17,6 +17,7 @@ table.table.table-hover
       th = t 'common.tasks.name'
       th = t 'common.tasks.content'
       th = t 'common.tasks.status'
+      th = sort_th(t('common.tasks.priority'),'priority')
       th = sort_th(t('common.tasks.deadline'),'deadline')
       th = t 'common.tasks.created_at'
       th
@@ -27,6 +28,7 @@ table.table.table-hover
         td = task.name
         td = task.content
         td = task.status
+        td = task.human_attribute_enum(:priority)
         td = task.deadline.strftime("%Y-%m-%d %H:%M")
         td = task.created_at.strftime("%Y-%m-%d %H:%M")
         td = link_to t('common.tasks.show'), task_path(task.id)
