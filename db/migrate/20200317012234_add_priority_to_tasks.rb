@@ -5,6 +5,6 @@ class AddPriorityToTasks < ActiveRecord::Migration[5.2]
   end
 
   def down
-  remove_column :tasks, :priority
+    remove_column :tasks, :priority
   end
 end
