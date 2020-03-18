@@ -15,14 +15,14 @@
   div.task_status.form-group
     = f.label :status
     div.radio_inline
-      = f.radio_button :status, Task.human_attribute_name(:waiting)
-      = t('common.tasks.waiting')
+      = f.radio_button :status, :waiting
+      = Task.human_attribute_enum_value(:status, :waiting)
     div.radio_inline
-      = f.radio_button :status, Task.human_attribute_name(:working)
-      = t('common.tasks.working')
+      = f.radio_button :status, :working
+      = Task.human_attribute_enum_value(:status, :working)
     div.radio_inline
-      = f.radio_button :status, Task.human_attribute_name(:completed)
-      = t('common.tasks.completed')
+      = f.radio_button :status, :completed
+      = Task.human_attribute_enum_value(:status, :completed)
   / div.task_priority.form-group
   /   = f.label :priority
   /   = f.select :priority, Task.enum_options_for_select(:priority)
