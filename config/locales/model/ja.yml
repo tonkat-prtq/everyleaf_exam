@@ -8,8 +8,14 @@ ja:
         content: 内容
         deadline: 期限
         status: ステータス
+        priority: 優先度
+        created_at: 作成日
+        updated_at: 更新日
+      task/status:
         waiting: 未着手
         working: 着手
         completed: 完了
-        created_at: 作成日
-        updated_at: 更新日
+      task/priority:
+        high: 高
+        medium: 中
+        low: 低
