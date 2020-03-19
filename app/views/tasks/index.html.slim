@@ -18,8 +18,8 @@ table.table.table-hover
       th = t 'common.tasks.name'
       th = t 'common.tasks.content'
       th = t 'common.tasks.status'
-      th = sort_th(t('common.tasks.priority'),'priority')
-      th = sort_th(t('common.tasks.deadline'),'deadline')
+      th = sort_th_asc(t('common.tasks.priority'),'priority')
+      th = sort_th_desc(t('common.tasks.deadline'),'deadline')
       th = t 'common.tasks.created_at'
       th
       th
@@ -29,9 +29,11 @@ table.table.table-hover
         td = task.name
         td = task.content
         td = task.human_attribute_enum(:status)
-        td = task.human_attribute_enum(:priority)
+        td.priority = task.human_attribute_enum(:priority)
         td = task.deadline.strftime("%Y-%m-%d %H:%M")
         td = task.created_at.strftime("%Y-%m-%d %H:%M")
         td = link_to t('common.tasks.show'), task_path(task.id)
         td = link_to t('common.tasks.edit'), edit_task_path(task.id)
         td = link_to t('common.tasks.destroy'), task_path(task.id), method: :delete
+
+= link_to t('.new'), new_task_path
