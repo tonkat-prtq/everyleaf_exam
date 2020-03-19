@@ -48,29 +48,29 @@ RSpec.describe 'Tasks', type: :model do
 
     describe 'ステータスのみの検索' do
       example '検索したステータスのみ表示される' do
-        expect(Task.search_with_status("着手")).to include(@new_task)
+        expect(Task.search_with_status(:working)).to include(@new_task)
       end
 
       example 'ステータス名にマッチしない場合はNG' do
-        expect(Task.search_with_status("着手")).to_not include(@task, @completed_task)
+        expect(Task.search_with_status(:working)).to_not include(@task, @completed_task)
       end
     end
 
     describe 'タスク名とステータス名両方での検索' do
       example 'どちらの検索条件にも引っかかるタスクがマッチする' do
-        expect(Task.search_with_name("new_test_task").search_with_status("着手")).to include(@new_task)
+        expect(Task.search_with_name("new_test_task").search_with_status(:working)).to include(@new_task)
       end
 
       example 'タスク名のみマッチしてもステータスがマッチしなければ検索結果は得られない' do
-        expect(Task.search_with_name("new_test_task").search_with_status("未着手")).to_not include(@new_task)
+        expect(Task.search_with_name("new_test_task").search_with_status(:waiting)).to_not include(@new_task)
       end
 
       example 'ステータスのみマッチしてもタスク名がマッチしなければ検索結果は得られない' do
-        expect(Task.search_with_name("qwerty").search_with_status("着手")).to_not include(@new_task)
+        expect(Task.search_with_name("qwerty").search_with_status(:working)).to_not include(@new_task)
       end
 
       example '両方にマッチするタスクがない場合、何も得られない' do
-        expect(Task.search_with_name("qwerty").search_with_status("qwerty")).to_not include(@task, @new_task, @completed_task)
+        expect(Task.search_with_name("qwerty").search_with_status(4)).to_not include(@task, @new_task, @completed_task)
       end
     end
   end
