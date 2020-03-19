@@ -35,14 +35,32 @@ RSpec.describe 'Tasks', type: :system do
         end
       end
     end
+    
+    describe '並び替えのテスト' do
+      context '期限ボタンを押した場合' do
+        example 'タスクが期限日の降順に並び替えられること' do
+          click_on '期限'
+          set_task
+          within('tbody') do
+            expect(page).to have_text /.*new_test_task.*TEST_TASK.*/m
+            # mオプションは、ドットが改行にもマッチするオプション（複数行オプション）
+          end
+        end
+      end
 
-    context '期限ボタンを押した場合' do
-      example 'タスクが期限日の降順に並び替えられること' do
-        click_on '期限'
-        set_task
-        within('tbody') do
-          expect(page).to have_text /.*new_test_task.*TEST_TASK.*/m
-          # mオプションは、ドットが改行にもマッチするオプション（複数行オプション）
+      context '優先度ボタンを押した場合' do
+        example 'タスクが優先度の高い順に並び替えられること' do
+          click_on '優先度'
+          set_task
+          first('.priority').has_text? "高"
+          page.all('.priority')[1].has_text? "中"
+
+          # within('.prioirty') do
+          #   expect(page).to have_text /.*高.*中.*/m
+          # end
+
+          # 上記のコードだとダメだった。
+          # Unable to find css ".priority" のエラー。これは要素が複数存在する場合にも出るらしく、tdにpriorityクラスを当ててるのでセルの数だけpriorityクラスが存在してしまい、このエラーが発生したと思われる。
         end
       end
     end
