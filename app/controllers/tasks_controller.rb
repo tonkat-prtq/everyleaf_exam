@@ -1,10 +1,19 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i(show edit update destroy) 
+  PER = 5
   def index
+    @tasks = Task.all
+    
+    @tasks = @tasks
+    .search_with_name(params[:name])
+    .search_with_status(params[:status])
+
+    # 検索のコードを上に持ってきてしまうと予期せぬ動作になるかと思ったが、メソッドが引数を受け取らない限りreturnされるコードなので問題がない
+
     if params[:sort]
-      @tasks = Task.all.order(params[:sort])
+      @tasks = @tasks.page(params[:page]).per(PER).order(params[:sort])
     else
-      @tasks = Task.all.default_order
+      @tasks = @tasks.page(params[:page]).per(PER).default_order
     end
 
     # if params[:search]
@@ -19,9 +28,6 @@ class TasksController < ApplicationController
     #   end
     # end
 
-    @tasks = @tasks
-      .search_with_name(params[:name])
-      .search_with_status(params[:status])
   end
 
   def new
