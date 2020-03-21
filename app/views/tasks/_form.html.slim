@@ -39,5 +39,6 @@
       = Task.human_attribute_enum_value(:priority, :low)
   div.task_deadline.form-group
     = f.label :deadline
-    = f.datetime_field :deadline, placeholder: Task.human_attribute_name(:deadline), class: 'form-control'
+    div.datetime_inline
+      = f.datetime_select :deadline, placeholder: Task.human_attribute_name(:deadline), class: 'form-control'
   = f.submit(class: 'btn btn-primary')
