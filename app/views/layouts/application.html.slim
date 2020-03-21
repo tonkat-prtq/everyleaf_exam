@@ -8,7 +8,11 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
-      div.container-fluid
+    div.navbar.navbar-expand-md.navbar-light.bg-light
+      div.navbar-brand = link_to 'EveryLeaf', tasks_path, class: 'text-decoration-none text-reset'
+      span.ul.navbar-text = link_to new_task_path, class: 'text-reset', 'data-toggle': "tooltip", 'title': t('common.tasks.new')
+        = content_tag(:i, "", class: "far fa-file fa-lg")
+    div.container-fluid
       - flash.each do |key, value|
         = content_tag(:p, value, class: "alert alert-#{key}")
       = yield

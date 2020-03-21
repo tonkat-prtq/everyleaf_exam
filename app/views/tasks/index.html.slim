@@ -1,4 +1,4 @@
-h1 = link_to t('.title'), root_path, class: 'text-decoration-none'
+h1 = link_to t('.title'), root_path, class: 'text-decoration-none text-reset'
 / ここはlazy lookupで呼び出し
 
 = form_with(method: :get, local: true, url: tasks_path) do |f|
@@ -33,11 +33,11 @@ table.table.table-hover
         td.priority = task.human_attribute_enum(:priority)
         td = task.deadline.strftime("%Y-%m-%d %H:%M")
         td = task.created_at.strftime("%Y-%m-%d %H:%M")
-        td = link_to t('common.tasks.show'), task_path(task.id)
-        td = link_to t('common.tasks.edit'), edit_task_path(task.id)
-        td = link_to t('common.tasks.destroy'), task_path(task.id), method: :delete
-
+        td = link_to task_path(task.id), class: 'text-reset', 'data-toggle': "tooltip", 'title': t('common.tasks.show')
+          = content_tag(:i, "", class: "fas fa-tasks fa-lg")
+        td = link_to edit_task_path(task.id), class: 'text-reset', 'data-toggle': "tooltip", 'title': t('common.tasks.edit')
+          = content_tag(:i, "", class: "fas fa-edit fa-lg")
+        td = link_to task_path(task.id), method: :delete, class: 'text-reset', 'data-toggle': "tooltip", 'title': t('common.tasks.destroy')
+          = content_tag(:i, "", class: "fas fa-trash fa-lg")
 
 = paginate @tasks
-
-= link_to t('.new'), new_task_path
