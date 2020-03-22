@@ -12,4 +12,33 @@
   div.task_content.form-group
     = f.label :content
     = f.text_field :content, placeholder: Task.human_attribute_name(:content), class: 'form-control'
+  div.task_status.form-group
+    = f.label :status
+    div.radio_inline
+      = f.radio_button :status, :waiting
+      = Task.human_attribute_enum_value(:status, :waiting)
+    div.radio_inline
+      = f.radio_button :status, :working
+      = Task.human_attribute_enum_value(:status, :working)
+    div.radio_inline
+      = f.radio_button :status, :completed
+      = Task.human_attribute_enum_value(:status, :completed)
+  / div.task_priority.form-group
+  /   = f.label :priority
+  /   = f.select :priority, Task.enum_options_for_select(:priority)
+  div.task_priority.form-group
+    = f.label :priority
+    div.radio_inline
+      = f.radio_button :priority, :high
+      = Task.human_attribute_enum_value(:priority, :high)
+    div.radio_inline
+      = f.radio_button :priority, :medium
+      = Task.human_attribute_enum_value(:priority, :medium)
+    div.radio_inline
+      = f.radio_button :priority, :low
+      = Task.human_attribute_enum_value(:priority, :low)
+  div.task_deadline.form-group
+    = f.label :deadline
+    div.datetime_inline
+      = f.datetime_select :deadline, placeholder: Task.human_attribute_name(:deadline), class: 'form-control'
   = f.submit(class: 'btn btn-primary')

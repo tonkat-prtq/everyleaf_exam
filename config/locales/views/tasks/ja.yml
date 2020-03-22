@@ -2,6 +2,10 @@ ja:
   tasks:
     index:
       title: タスク一覧
+      search: 検索
+      name_search: タスク名で検索
+      status_search: ステータスで検索
+      new: 新規作成
     new:
       title: 新規作成
     edit:

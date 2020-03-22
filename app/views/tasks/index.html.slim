@@ -1,10 +1,25 @@
-h1 = t '.title' 
+h1 = link_to t('.title'), root_path, class: 'text-decoration-none text-reset'
 / ここはlazy lookupで呼び出し
+
+= form_with(method: :get, local: true, url: tasks_path) do |f|
+  = f.label :name_search, t('.name_search'), value: params[:name]
+  = f.search_field :name, placeholder: t('.name_search'), class: 'form-control'
+
+  = f.label :status_search, t('.status_search'), value: params[:status]
+  = f.select :status, Task.enum_options_for_select(:status), class: 'form_control', include_blank: true, selected: ''
+  / = f.select :status, [Task.human_attribute_name('status.waiting'), Task.human_attribute_name('status.working'), Task.human_attribute_name('status.completed')], class: 'form-control', include_blank: true, selected: ''
+
+  = f.hidden_field :search, value: true
+  div.search_button = f.submit(t('.search'), class: 'btn btn-secondary')
+
 table.table.table-hover
   thead.thead-default
     = tag.tr do
       th = t 'common.tasks.name'
       th = t 'common.tasks.content'
+      th = t 'common.tasks.status'
+      th = sort_th_asc(t('common.tasks.priority'),'priority')
+      th = sort_th_desc(t('common.tasks.deadline'),'deadline')
       th = t 'common.tasks.created_at'
       th
       th
@@ -14,7 +29,15 @@ table.table.table-hover
       = tag.tr(class: 'task_row') do
         td = task.name
         td = task.content
+        td = task.human_attribute_enum(:status)
+        td.priority = task.human_attribute_enum(:priority)
+        td = task.deadline.strftime("%Y-%m-%d %H:%M")
         td = task.created_at.strftime("%Y-%m-%d %H:%M")
-        td = link_to t('common.tasks.show'), task_path(task.id)
-        td = link_to t('common.tasks.edit'), edit_task_path(task.id)
-        td = link_to t('common.tasks.destroy'), task_path(task.id), method: :delete
+        td = link_to task_path(task.id), class: 'text-reset', 'data-toggle': "tooltip", 'title': t('common.tasks.show')
+          = content_tag(:i, "", class: "fas fa-tasks fa-lg")
+        td = link_to edit_task_path(task.id), class: 'text-reset', 'data-toggle': "tooltip", 'title': t('common.tasks.edit')
+          = content_tag(:i, "", class: "fas fa-edit fa-lg")
+        td = link_to task_path(task.id), method: :delete, class: 'text-reset', 'data-toggle': "tooltip", 'title': t('common.tasks.destroy')
+          = content_tag(:i, "", class: "fas fa-trash fa-lg")
+
+= paginate @tasks

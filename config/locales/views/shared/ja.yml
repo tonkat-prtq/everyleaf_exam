@@ -3,6 +3,9 @@ ja:
     tasks:
       name: タスク名
       content: 内容
+      deadline: 期限
+      priority: 優先度
+      status: ステータス
       show: 詳細
       edit: 編集
       destroy: 削除
