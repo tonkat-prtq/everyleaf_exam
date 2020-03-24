@@ -2,6 +2,7 @@ ja:
   activerecord:
     models:
       task: タスク
+      user: ユーザー
     attributes:
       task:
         name: タスク名
@@ -19,3 +20,8 @@ ja:
         high: 高
         medium: 中
         low: 低
+      user:
+        name: ユーザー名
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード(再入力)

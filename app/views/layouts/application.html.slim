@@ -10,9 +10,23 @@ html
   body
     div.navbar.navbar-expand-md.navbar-light.bg-light
       div.navbar-brand = link_to 'EveryLeaf', tasks_path, class: 'text-decoration-none text-reset'
-      span.ul.navbar-text = link_to new_task_path, class: 'text-reset', 'data-toggle': "tooltip", 'title': t('common.tasks.new')
-        = content_tag(:i, "", class: "far fa-file fa-lg")
+      button.navbar-toggler aria-controls="Navber" aria-expanded="false" aria-label="responsive navigation bar" data-target="#Navber" data-toggle="collapse" type="button"
+        span.navbar-toggler-icon
+      #Navber.collapse.navbar-collapse
+        ul.div.navbar-nav.mr-auto
+          - if logged_in?
+            li.div.nav-item = link_to "My Page", user_path(current_user.id), class: 'nav-link'
+            li.div.nav-item = link_to "Logout", session_path(current_user.id), method: :delete, class: 'nav-link'
+          - else
+            li.div.nav-item = link_to "Sign Up", new_user_path, class: 'nav-link'
+            li.div.nav-item = link_to "Log in", new_session_path, class: 'nav-link'
+        span.ul.navbar-text = link_to new_task_path, class: 'text-reset', 'data-toggle': "tooltip", 'title': t('common.tasks.new')
+          = content_tag(:i, "", class: "far fa-file fa-lg")
     div.container-fluid
       - flash.each do |key, value|
         = content_tag(:p, value, class: "alert alert-#{key}")
       = yield
+    / 以下のスクリプトを読み込まないとハンバーガーメニュー等のjQueryを使うBootstrapスタイルが適用されない
+    script crossorigin="anonymous" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+    script crossorigin="anonymous" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" 
+    script crossorigin="anonymous" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" 

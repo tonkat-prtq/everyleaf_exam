@@ -1,8 +1,13 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show]
+  skip_before_action :login_required, only: [:new, :create]
+  before_action :set_user, only: [:show, :edit, :update]
   
   def new
-    @user = User.new
+    if logged_in?
+      redirect_to user_path(@current_user.id)
+    else
+      @user = User.new
+    end
   end
 
   def create
@@ -16,6 +21,9 @@ class UsersController < ApplicationController
   end
 
   def show
+    unless @user.id == current_user.id
+      redirect_to root_path
+    end
   end
 
   private
