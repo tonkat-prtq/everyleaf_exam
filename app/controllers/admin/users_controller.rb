@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :admin_check
-  
+
   def index
     @users = User.all
   end
@@ -13,7 +13,7 @@ class Admin::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to user_path(@user.id)
+      redirect_to admin_users_path
     else
       render :new
     end
@@ -32,7 +32,7 @@ class Admin::UsersController < ApplicationController
       render :edit
     else
       if @user.update(user_params)
-        redirect_to user_path(@user.id), flash: {success: "ユーザー情報を更新しました"}
+        redirect_to admin_users_path, flash: {success: "ユーザー情報を更新しました"}
       else
         render :edit
       end
@@ -40,12 +40,18 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
+    if @user.id == current_user.id
+      redirect_to admin_users_path, flash: {danger: "自分のユーザー削除は出来ません"}
+    else
+      @user.destroy
+      redirect_to admin_users_path, flash: {danger: "ユーザーを削除しました"}
+    end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :admin, :password, :password_confirmation)
+    params.require(:user).permit(:id, :name, :email, :admin, :password, :password_confirmation)
   end
 
   def set_user
