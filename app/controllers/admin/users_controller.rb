@@ -3,7 +3,7 @@ class Admin::UsersController < ApplicationController
   before_action :admin_check
 
   def index
-    @users = User.all
+    @users = User.includes(:tasks)
   end
 
   def new
