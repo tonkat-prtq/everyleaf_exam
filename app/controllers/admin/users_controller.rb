@@ -1,6 +1,7 @@
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :admin_check
+  PER = 5
 
   def index
     @users = User.includes(:tasks)
@@ -20,7 +21,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def show
-
+    # paginationがうまくいかないので見送り
   end
 
   def edit

@@ -1,5 +1,6 @@
 ja:
   common:
+    index: 一覧
     show: 詳細
     edit: 編集
     destroy: 削除
