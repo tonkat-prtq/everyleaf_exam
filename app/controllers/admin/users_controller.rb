@@ -41,12 +41,8 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    if @user.id == current_user.id
-      redirect_to admin_users_path, flash: {danger: "自分のユーザー削除は出来ません"}
-    else
-      @user.destroy
-      redirect_to admin_users_path, flash: {danger: "ユーザーを削除しました"}
-    end
+    @user.destroy
+    redirect_to admin_users_path, flash: {danger: "ユーザーを削除しました"}
   end
 
   private
@@ -62,7 +58,7 @@ class Admin::UsersController < ApplicationController
   def admin_check
     if current_user.admin
     else
-      redirect_to user_path(current_user.id)
+      redirect_to root_path, flash: {danger: "あなたは管理者ではありません"}
     end
   end
 end
