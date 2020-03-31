@@ -25,5 +25,5 @@ table.table.table-hover
           = content_tag(:i, "", class: "fas fa-tasks fa-lg")
         td = link_to edit_admin_user_path(user.id), class: 'text-reset', 'data-toggle': "tooltip", 'title': t('common.edit')
           = content_tag(:i, "", class: "fas fa-edit fa-lg")
-        td = link_to admin_user_path(user.id), method: :delete, class: 'text-reset', 'data-toggle': "tooltip", 'title': t('common.destroy')
+        td = link_to admin_user_path(user.id), method: :delete, class: 'text-reset delete-btn', 'data-toggle': "tooltip", 'title': t('common.destroy')
           = content_tag(:i, "", class: "fas fa-trash fa-lg")
