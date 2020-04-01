@@ -10,3 +10,6 @@ User.create(name: "firstUser", email: "user1@test.com", password: "password", pa
 User.create(name: "AdminUser2", email: "admin2@test.com", password: "password", password_confirmation: "password", admin: true)
 User.create(name: "AdminUser3", email: "admin3@test.com", password: "password", password_confirmation: "password", admin: true)
 User.create(name: "AdminUser4", email: "admin4@test.com", password: "password", password_confirmation: "password", admin: true)
+
+Label.create(name: "勉強")
+Labeling.create(label_id: 1, task_id: 16)

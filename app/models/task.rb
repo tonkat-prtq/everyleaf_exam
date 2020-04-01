@@ -1,8 +1,8 @@
 class Task < ApplicationRecord
   belongs_to :user
   has_many :labelings, dependent: :destroy
-  has_many :labels, through: :labeling # labelingテーブルを通してlabelテーブルの情報を持ってこれるようにしている
-  
+  has_many :labels, through: :labelings # labelingテーブルを通してlabelテーブルの情報を持ってこれるようにしている
+
   validates :name, presence: true
   validates :name, length: {maximum: 40}
   validates :content, presence: true

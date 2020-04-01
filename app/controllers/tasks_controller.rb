@@ -78,6 +78,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :content, :deadline, :status, :priority)
+    params.require(:task).permit(:name, :content, :deadline, :status, :priority, {label_ids: [] }) # label_id達を配列で受け取るのでこういう書き方になる
   end
 end

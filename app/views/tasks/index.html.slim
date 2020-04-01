@@ -19,6 +19,7 @@ table.table.table-hover
       th = t 'common.tasks.content'
       th = t 'common.tasks.status'
       th = sort_th_asc(t('common.tasks.priority'),'priority')
+      th = "ラベル"
       th = sort_th_desc(t('common.tasks.deadline'),'deadline')
       th = t 'common.tasks.created_at'
       th
@@ -31,8 +32,11 @@ table.table.table-hover
         td = task.content
         td = task.human_attribute_enum(:status)
         td.priority = task.human_attribute_enum(:priority)
-        td = task.deadline.strftime("%Y-%m-%d %H:%M")
-        td = task.created_at.strftime("%Y-%m-%d %H:%M")
+        td
+          - task.labels.each do |l|
+            = l.name
+        td = task.deadline.strftime("%Y-%m-%d")
+        td = task.created_at.strftime("%Y-%m-%d")
         td = link_to task_path(task.id), class: 'text-reset', 'data-toggle': "tooltip", 'title': t('common.show')
           = content_tag(:i, "", class: "fas fa-tasks fa-lg")
         td = link_to edit_task_path(task.id), class: 'text-reset', 'data-toggle': "tooltip", 'title': t('common.edit')
