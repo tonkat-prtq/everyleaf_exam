@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.describe 'Tasks', type: :model do
   before do
-    @task = build(:task)
-    @new_task = build(:new_task)
-    @completed_task = build(:completed_task)
+    @user = build(:user)
+    @task = build(:task, user: @user)
+    @new_task = build(:new_task, user: @user)
+    @completed_task = build(:completed_task, user: @user)
   end
 
   describe 'taskのバリデーション' do
@@ -31,9 +32,10 @@ RSpec.describe 'Tasks', type: :model do
 
   describe '検索のテスト' do
     before do
-      @new_task = create(:new_task)
-      @task = create(:task)
-      @completed_task = create(:completed_task)
+      @user = create(:user)
+      @task = create(:task, user: @user)
+      @new_task = create(:new_task, user: @user)
+      @completed_task = create(:completed_task, user: @user)
     end
     
     describe 'タスク名のみの検索' do

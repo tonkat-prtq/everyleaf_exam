@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i(show edit update destroy) 
   PER = 5
   def index
-    @tasks = Task.all
+    @tasks = current_user.tasks
     
     @tasks = @tasks
     .search_with_name(params[:name])
@@ -31,11 +31,16 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = Task.new
+    if params[:back]
+      @task = current_user.tasks.build(task_params)
+      render :new
+    else
+      @task = Task.new
+    end
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
     if @task.save
       redirect_to task_path(@task.id), flash: {success: "タスクを登録しました"}
     else
@@ -69,7 +74,7 @@ class TasksController < ApplicationController
   private
 
   def set_task
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
   end
 
   def task_params

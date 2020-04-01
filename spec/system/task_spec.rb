@@ -7,8 +7,13 @@ wait = Selenium::WebDriver::Wait.new(:timeout => 100)
 
 RSpec.describe 'Tasks', type: :system do
   before do
-    @task = create(:task)
-    @new_task = create(:new_task)
+    @user = create(:user)
+    visit new_session_path
+    fill_in 'session[email]', with: 'sample1@example.com'
+    fill_in 'session[password]', with: 'password'
+    click_on 'ログイン'
+    @task = create(:task, user: @user)
+    @new_task = create(:new_task, user: @user)
   end
 
   describe 'タスク一覧画面' do
@@ -132,7 +137,9 @@ RSpec.describe 'Tasks', type: :system do
         fill_in '内容', with: "TEST_CONTENT"
         # 「登録する」というvalue（表記文字）のあるボタンをclick_onする（クリックする）
         # 4.「登録する」というvalue（表記文字）のあるボタンをclick_onする（クリックする）する処理を書く
-        fill_in '期限', with: Time.local(2020,2,20,2,2,2)
+        select '2022', from: 'task[deadline(1i)]'
+        select '2月', from: 'task[deadline(2i)]'
+        select '22', from: 'task[deadline(3i)]'
         click_button '登録する'
         # clickで登録されたはずの情報が、タスク詳細ページに表示されているかを確認する
         # （タスクが登録されたらタスク詳細画面に遷移されるという前提）
