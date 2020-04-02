@@ -7,7 +7,7 @@ class TasksController < ApplicationController
     @tasks = @tasks
     .search_with_name(params[:name])
     .search_with_status(params[:status])
-
+    .search_with_label(params[:label])
     # 検索のコードを上に持ってきてしまうと予期せぬ動作になるかと思ったが、メソッドが引数を受け取らない限りreturnされるコードなので問題がない
 
     if params[:sort]

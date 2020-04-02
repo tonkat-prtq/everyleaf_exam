@@ -8,6 +8,8 @@ h1 = link_to t('.title'), root_path, class: 'text-decoration-none text-reset'
   = f.label :status_search, t('.status_search'), value: params[:status]
   = f.select :status, Task.enum_options_for_select(:status), class: 'form_control', include_blank: true, selected: ''
   / = f.select :status, [Task.human_attribute_name('status.waiting'), Task.human_attribute_name('status.working'), Task.human_attribute_name('status.completed')], class: 'form-control', include_blank: true, selected: ''
+  = f.label :label_search, "ラベルで検索", value: params[:label]
+  = f.select :label, Label.pluck(:name, :id), { include_blank: true}
 
   = f.hidden_field :search, value: true
   div.search_button = f.submit(t('.search'), class: 'btn btn-secondary')

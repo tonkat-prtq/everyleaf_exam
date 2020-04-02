@@ -34,6 +34,11 @@ class Task < ApplicationRecord
     where(status: status)
   }
 
+  scope :search_with_label, -> (label) {
+    return if label.blank?
+    joins(:labels).where('labels.id = ?', label) # where(id: label)じゃだめ
+  }
+
   def self.human_attribute_enum_value(attr_name, value)
     human_attribute_name("#{attr_name}.#{value}")
   end
