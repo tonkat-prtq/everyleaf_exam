@@ -245,3 +245,11 @@ h1 = link_to t('.title'), root_path, class: 'text-decoration-none text-reset'
 ```
 
 となる。
+
+参考URL
+
+[Railsでラベル機能（タグ付け）を実装する - Qiita](https://qiita.com/harashoo/items/32e9fddf558aaea86267)
+[【Rails】完全理解 formでセレクトボックスをつくるselectの使い方 \| Always be myself](https://310nae.com/rails-selectbox/)
+[【Rails入門】joinsの使い方まとめ \| 侍エンジニア塾ブログ（Samurai Blog） - プログラミング入門者向けサイト](https://www.sejuku.net/blog/26522)
+[フォーム(form) \| Railsドキュメント](https://railsdoc.com/form#select)
+[関連するモデルの条件で検索したい - Qiita](https://qiita.com/ishidamakot/items/7dba557d764362a828ff#%E7%89%B9%E5%AE%9A%E3%81%AE%E5%95%86%E5%93%81%E3%82%92%E6%B3%A8%E6%96%87%E3%81%97%E3%81%9F%E9%A1%A7%E5%AE%A2%E3%82%92%E6%8A%BD%E5%87%BA)
