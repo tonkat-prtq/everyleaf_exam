@@ -16,26 +16,33 @@ table.table.table-hover
       th = t 'common.tasks.content'
       th = t 'common.tasks.status'
       th = t 'common.tasks.priority'
+      th = t 'common.label'
       th = t 'common.tasks.deadline'
       th = t 'common.tasks.created_at'
       th
       th
       th
   tbody
-  - @user.tasks.each do |task|
+  - @user_tasks.each do |task|
       = tag.tr(class: 'task_row') do
         td = task.name
         td = task.content
         td = task.human_attribute_enum(:status)
         td.priority = task.human_attribute_enum(:priority)
-        td = task.deadline.strftime("%Y-%m-%d %H:%M")
-        td = task.created_at.strftime("%Y-%m-%d %H:%M")
+        td
+          - task.labels.each do |l|
+            = l.name
+        td = task.deadline.strftime("%Y-%m-%d")
+        td = task.created_at.strftime("%Y-%m-%d")
         td = link_to task_path(task.id), class: 'text-reset', 'data-toggle': "tooltip", 'title': t('common.show')
           = content_tag(:i, "", class: "fas fa-tasks fa-lg")
         td = link_to edit_task_path(task.id), class: 'text-reset', 'data-toggle': "tooltip", 'title': t('common.edit')
           = content_tag(:i, "", class: "fas fa-edit fa-lg")
         td = link_to task_path(task.id), method: :delete, class: 'text-reset', 'data-toggle': "tooltip", 'title': t('common.destroy')
           = content_tag(:i, "", class: "fas fa-trash fa-lg")
-sass:
-  h1
-    color: mediumaquamarine
+
+= paginate @user_tasks
+
+/ sass:
+/   h1
+/     color: mediumaquamarine

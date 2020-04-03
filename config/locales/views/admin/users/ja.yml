@@ -1,0 +1,7 @@
+ja:
+  admin:
+    users:
+      edit:
+        title: 編集
+      new:
+        title: ユーザー作成

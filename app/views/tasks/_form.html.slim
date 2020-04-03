@@ -38,7 +38,7 @@
       = f.radio_button :priority, :low
       = Task.human_attribute_enum_value(:priority, :low)
   div.task_labels.form-group
-    = f.label :label # 後で日本語化
+    = f.label :labels
     div.check_inline
       = f.collection_check_boxes(:label_ids, Label.all, :id, :name)
   div.task_deadline.form-group

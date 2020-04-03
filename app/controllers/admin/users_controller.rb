@@ -21,7 +21,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def show
-    # paginationがうまくいかないので見送り
+    @user_tasks = @user.tasks.page(params[:page]).per(PER).default_order
   end
 
   def edit

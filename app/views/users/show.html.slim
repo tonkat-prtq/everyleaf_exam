@@ -4,8 +4,8 @@ div.jumbotron(style="background-size: cover;, background-position: center 60%;")
       h1.display-4h1 #{@user.name} 
       p.lead
     .container
-        p
-          |Email : #{@user.email}
+        p = t('.email')
+        = @user.email
 sass:
   h1
     color: mediumaquamarine

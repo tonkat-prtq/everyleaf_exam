@@ -24,3 +24,4 @@ ja:
     sessions:
       login: ログイン
       logout: ログアウト
+    label: ラベル
