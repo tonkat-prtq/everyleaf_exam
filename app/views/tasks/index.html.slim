@@ -34,7 +34,7 @@ table.table.table-hover
         td = task.content
         td = task.human_attribute_enum(:status)
         td.priority = task.human_attribute_enum(:priority)
-        td
+        td.labels
           - task.labels.each do |l|
             = l.name
         td = task.deadline.strftime("%Y-%m-%d")

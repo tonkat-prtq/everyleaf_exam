@@ -27,7 +27,7 @@ class Task < ApplicationRecord
   scope :sort_deadline, -> { order(deadline: :desc) }
   scope :search_with_name, -> (name) {
     return if name.blank?
-    where('name LIKE ?', "%#{name}%")
+    where('tasks.name LIKE ?', "%#{name}%")
   }
   scope :search_with_status, -> (status) {
     return if status.blank?
