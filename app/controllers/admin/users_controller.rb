@@ -21,7 +21,11 @@ class Admin::UsersController < ApplicationController
   end
 
   def show
-    @user_tasks = @user.tasks.page(params[:page]).per(PER).default_order
+    if params[:sort]
+      @user_tasks = @user.tasks.page(params[:page]).per(PER).order(params[:sort])
+    else
+      @user_tasks = @user.tasks.page(params[:page]).per(PER).default_order
+    end
   end
 
   def edit

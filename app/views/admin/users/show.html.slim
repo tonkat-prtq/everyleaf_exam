@@ -15,9 +15,9 @@ table.table.table-hover
       th = t 'common.tasks.name'
       th = t 'common.tasks.content'
       th = t 'common.tasks.status'
-      th = t 'common.tasks.priority'
+      th = sort_th_asc(t('common.tasks.priority'), 'priority')
       th = t 'common.label'
-      th = t 'common.tasks.deadline'
+      th = sort_th_desc(t('common.tasks.deadline'), 'deadline')
       th = t 'common.tasks.created_at'
       th
       th
