@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   helper_method :logged_in?
+  helper_method :admin_check?
   before_action :login_required
 
   private
@@ -18,6 +19,13 @@ class ApplicationController < ActionController::Base
 
   def login_required
     redirect_to new_session_path unless current_user
+  end
+
+  def admin_check?
+    current_user.admin?
+    # else
+    #   redirect_to root_path, flash: {danger: "あなたは管理者ではありません"}
+    # end
   end
 
 end

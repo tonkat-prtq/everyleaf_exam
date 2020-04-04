@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :admin_check
+  before_action :admin_user # 現在ログインしているユーザーが管理者でなければ、root_pathへリダイレクト
   PER = 5
 
   def index
@@ -14,7 +14,7 @@ class Admin::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to admin_users_path, flash: {success: "ユーザーを作成しました"}
+      redirect_to admin_users_path, flash: {success: t('.notice')}
     else
       render :new
     end
@@ -37,7 +37,7 @@ class Admin::UsersController < ApplicationController
       render :edit
     else
       if @user.update(user_params)
-        redirect_to admin_users_path, flash: {success: "ユーザー情報を更新しました"}
+        redirect_to admin_users_path, flash: {success: t('.notice')}
       else
         render :edit
       end
@@ -46,7 +46,7 @@ class Admin::UsersController < ApplicationController
 
   def destroy
     @user.destroy
-    redirect_to admin_users_path, flash: {danger: "ユーザーを削除しました"}
+    redirect_to admin_users_path, flash: {danger: t('.notice')}
   end
 
   private
@@ -59,10 +59,7 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def admin_check
-    if current_user.admin
-    else
-      redirect_to root_path, flash: {danger: "あなたは管理者ではありません"}
-    end
+  def admin_user
+    redirect_to root_path, flash: {danger: t('.danger')} unless current_user.admin?
   end
 end

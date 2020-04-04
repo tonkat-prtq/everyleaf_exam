@@ -221,3 +221,12 @@ ja:
       danger: ログインに失敗しました
     destroy:
       notice: ログアウトしました
+  admin:
+    users:
+      danger: あなたは管理者ではありません
+      create:
+        notice: ユーザーを作成しました
+      update:
+        notice: ユーザー情報を更新しました
+      destroy:
+        notice: ユーザーを削除しました
