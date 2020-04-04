@@ -45,8 +45,11 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    redirect_to admin_users_path, flash: {danger: t('.notice')}
+    if @user.destroy
+      redirect_to admin_users_path, flash: {danger: t('.notice')}
+    else
+      redirect_to admin_users_path, flash: {danger: t('.danger')}
+    end
   end
 
   private
