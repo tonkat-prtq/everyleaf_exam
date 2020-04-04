@@ -1,26 +1,25 @@
 doctype html
 html
   head
-    title
-      | EveryleafExam
+    title = t('common.brand')
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
     div.navbar.navbar-expand-md.navbar-light.bg-light
-      div.navbar-brand = link_to 'EveryLeaf', tasks_path, class: 'text-decoration-none text-reset'
+      div.navbar-brand = link_to t('common.brand'), tasks_path, class: 'text-decoration-none text-reset'
       button.navbar-toggler aria-controls="Navber" aria-expanded="false" aria-label="responsive navigation bar" data-target="#Navber" data-toggle="collapse" type="button"
         span.navbar-toggler-icon
       #Navber.collapse.navbar-collapse
         ul.div.navbar-nav.mr-auto
           - if logged_in?
-            li.div.nav-item = link_to "My Page", user_path(current_user.id), class: 'nav-link'
-            li.div.nav-item = link_to "Admin Page", admin_users_path, class: 'nav-link' if logged_in? && admin_check?
-            li.div.nav-item = link_to "Logout", session_path(current_user.id), method: :delete, class: 'nav-link'
+            li.div.nav-item = link_to t('application.mypage'), user_path(current_user.id), class: 'nav-link'
+            li.div.nav-item = link_to t('application.admin'), admin_users_path, class: 'nav-link' if logged_in? && admin_check?
+            li.div.nav-item = link_to t("common.sessions.logout"), session_path(current_user.id), method: :delete, class: 'nav-link'
           - else
-            li.div.nav-item = link_to "Sign Up", new_user_path, class: 'nav-link'
-            li.div.nav-item = link_to "Log in", new_session_path, class: 'nav-link'
+            li.div.nav-item = link_to t("common.users.signup"), new_user_path, class: 'nav-link'
+            li.div.nav-item = link_to t('common.sessions.login'), new_session_path, class: 'nav-link'
 
         span.ul.navbar-text = link_to new_task_path, class: 'text-reset', 'data-toggle': "tooltip", 'title': t('common.tasks.new')
           = content_tag(:i, "", class: "far fa-file fa-lg")
