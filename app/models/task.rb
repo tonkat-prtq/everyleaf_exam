@@ -1,5 +1,8 @@
 class Task < ApplicationRecord
   belongs_to :user
+  has_many :labelings, dependent: :destroy
+  has_many :labels, through: :labelings # labelingテーブルを通してlabelテーブルの情報を持ってこれるようにしている
+
   validates :name, presence: true
   validates :name, length: {maximum: 40}
   validates :content, presence: true
@@ -24,11 +27,16 @@ class Task < ApplicationRecord
   scope :sort_deadline, -> { order(deadline: :desc) }
   scope :search_with_name, -> (name) {
     return if name.blank?
-    where('name LIKE ?', "%#{name}%")
+    where('tasks.name LIKE ?', "%#{name}%")
   }
   scope :search_with_status, -> (status) {
     return if status.blank?
     where(status: status)
+  }
+
+  scope :search_with_label, -> (label) {
+    return if label.blank?
+    joins(:labels).where('labels.id = ?', label) # where(id: label)じゃだめ
   }
 
   def self.human_attribute_enum_value(attr_name, value)

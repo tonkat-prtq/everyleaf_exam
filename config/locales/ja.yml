@@ -205,3 +205,29 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
+  tasks:
+    create:
+      notice: タスクを作成しました
+    update:
+      notice: タスクを編集しました
+    destroy:
+      notice: タスクを削除しました
+  users:
+    create:
+      notice: ユーザー登録が完了しました
+  sessions:
+    create:
+      notice: ログインしました
+      danger: ログインに失敗しました
+    destroy:
+      notice: ログアウトしました
+  admin:
+    users:
+      danger: あなたは管理者ではありません
+      create:
+        notice: ユーザーを作成しました
+      update:
+        notice: ユーザー情報を更新しました
+      destroy:
+        notice: ユーザーを削除しました
+        danger: 管理者ユーザーを0にすることはできません

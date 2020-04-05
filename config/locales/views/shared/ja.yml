@@ -1,5 +1,9 @@
 ja:
+  application:
+    mypage: マイページ
+    admin: 管理者画面
   common:
+    brand: EveryLeaf
     index: 一覧
     show: 詳細
     edit: 編集
@@ -14,6 +18,7 @@ ja:
       created_at: 作成日時
       updated_at: 更新日時
     users:
+      signup: 新規登録
       name: ユーザー名
       email: メールアドレス
       password: パスワード
@@ -24,3 +29,4 @@ ja:
     sessions:
       login: ログイン
       logout: ログアウト
+    label: ラベル

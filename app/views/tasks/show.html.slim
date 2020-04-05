@@ -8,5 +8,8 @@ strong = t 'common.tasks.status'
 p = @task.human_attribute_enum(:status)
 strong = t 'common.tasks.priority'
 p = @task.human_attribute_enum(:priority)
+strong = "タグ"
+- @task.labels.each do |l|
+  p = l.name
 strong = t 'common.tasks.deadline'
 p = @task.deadline.strftime("%Y-%m-%d %H:%M")

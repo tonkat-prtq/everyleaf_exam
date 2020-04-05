@@ -8,6 +8,8 @@ h1 = link_to t('.title'), root_path, class: 'text-decoration-none text-reset'
   = f.label :status_search, t('.status_search'), value: params[:status]
   = f.select :status, Task.enum_options_for_select(:status), class: 'form_control', include_blank: true, selected: ''
   / = f.select :status, [Task.human_attribute_name('status.waiting'), Task.human_attribute_name('status.working'), Task.human_attribute_name('status.completed')], class: 'form-control', include_blank: true, selected: ''
+  = f.label :label_search, t('.label_search'), value: params[:label]
+  = f.select :label, Label.pluck(:name, :id), { include_blank: true }
 
   = f.hidden_field :search, value: true
   div.search_button = f.submit(t('.search'), class: 'btn btn-secondary')
@@ -19,6 +21,7 @@ table.table.table-hover
       th = t 'common.tasks.content'
       th = t 'common.tasks.status'
       th = sort_th_asc(t('common.tasks.priority'),'priority')
+      th = t 'common.label'
       th = sort_th_desc(t('common.tasks.deadline'),'deadline')
       th = t 'common.tasks.created_at'
       th
@@ -31,8 +34,11 @@ table.table.table-hover
         td = task.content
         td = task.human_attribute_enum(:status)
         td.priority = task.human_attribute_enum(:priority)
-        td = task.deadline.strftime("%Y-%m-%d %H:%M")
-        td = task.created_at.strftime("%Y-%m-%d %H:%M")
+        td.labels
+          - task.labels.each do |l|
+            = "#{l.name} "
+        td = task.deadline.strftime("%Y-%m-%d")
+        td = task.created_at.strftime("%Y-%m-%d")
         td = link_to task_path(task.id), class: 'text-reset', 'data-toggle': "tooltip", 'title': t('common.show')
           = content_tag(:i, "", class: "fas fa-tasks fa-lg")
         td = link_to edit_task_path(task.id), class: 'text-reset', 'data-toggle': "tooltip", 'title': t('common.edit')

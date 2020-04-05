@@ -7,7 +7,7 @@ class TasksController < ApplicationController
     @tasks = @tasks
     .search_with_name(params[:name])
     .search_with_status(params[:status])
-
+    .search_with_label(params[:label])
     # 検索のコードを上に持ってきてしまうと予期せぬ動作になるかと思ったが、メソッドが引数を受け取らない限りreturnされるコードなので問題がない
 
     if params[:sort]
@@ -42,7 +42,7 @@ class TasksController < ApplicationController
   def create
     @task = current_user.tasks.build(task_params)
     if @task.save
-      redirect_to task_path(@task.id), flash: {success: "タスクを登録しました"}
+      redirect_to task_path(@task.id), flash: {success: t('.notice')}
     else
       render :new
     end
@@ -59,7 +59,7 @@ class TasksController < ApplicationController
       render :edit
     else
       if @task.update(task_params)
-        redirect_to root_path, flash: {success: "タスクを編集しました"}
+        redirect_to root_path, flash: {success: t('.notice')}
       else
         render :edit
       end
@@ -68,7 +68,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to root_path, flash: {danger: "タスクを削除しました"}
+    redirect_to root_path, flash: {danger: t('.notice')}
   end
 
   private
@@ -78,6 +78,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :content, :deadline, :status, :priority)
+    params.require(:task).permit(:name, :content, :deadline, :status, :priority, {label_ids: [] }) # label_id達を配列で受け取るのでこういう書き方になる
   end
 end

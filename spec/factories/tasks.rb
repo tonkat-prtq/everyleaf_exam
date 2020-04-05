@@ -6,6 +6,10 @@ FactoryBot.define do
     sequence(:priority) { :high }
     sequence(:deadline) { Time.current }
     user
+
+    after(:create) do |task|
+      create(:labeling, task: task, label: create(:label))
+    end
   end
 
   factory :new_task, class: Task do # 存在しないclass名の名前をつける場合、optionで「このclassのテストデータにしてください」と指定
@@ -26,5 +30,10 @@ FactoryBot.define do
     sequence(:deadline) { Time.now - 1.days }
     sequence(:created_at) { Time.now - 2.days }
     user
+
+    after(:create) do |completed_task|
+      # labels = create(:label)
+      create(:labeling, task: completed_task, label: create(:label2))
+    end
   end
 end

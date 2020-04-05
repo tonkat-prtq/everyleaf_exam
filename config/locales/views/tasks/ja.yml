@@ -5,6 +5,7 @@ ja:
       search: 検索
       name_search: タスク名で検索
       status_search: ステータスで検索
+      label_search: ラベルで検索
       new: 新規作成
     new:
       title: 新規作成

@@ -10,7 +10,7 @@ module EveryleafExam
   class Application < Rails::Application
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local
-    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s] # フォルダ名、ファイル名は関係ない
     # I18n.enforce_available_locales = false
     config.load_defaults 5.2
     config.generators do |g|
