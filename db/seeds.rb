@@ -1,15 +1,47 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+10.times do |n|
+  User.create!(
+    name: "TEST_USER#{n + 1}",
+    email: "tester#{n + 1}@test.com",
+    password: "password",
+    password_confirmation: "password"
+  )
+end
 
-User.create(name: "firstUser", email: "user1@test.com", password: "password", password_confirmation: "password")
-User.create(name: "AdminUser2", email: "admin2@test.com", password: "password", password_confirmation: "password", admin: true)
-User.create(name: "AdminUser3", email: "admin3@test.com", password: "password", password_confirmation: "password", admin: true)
-User.create(name: "AdminUser4", email: "admin4@test.com", password: "password", password_confirmation: "password", admin: true)
+100.times do |n|
+  Task.create!(
+    name: "TESTASK#{n + 1}",
+    content: "tes#{n + 1}",
+    status: rand(3),
+    priority: rand(3),
+    deadline: Time.current,
+    user_id: rand(1..10)
+  )
+end
 
 Label.create(name: "勉強")
-Labeling.create(label_id: 1, task_id: 16)
+Label.create(name: "料理")
+Label.create(name: "仕事")
+
+100.times do |n|
+  Labeling.create!(label_id: rand(1..3), task_id: rand(1..90))
+end
+
+User.create!(
+  [
+    {
+      name: "admin1",
+      email: "admin1@test.com",
+      password: "password",
+      password_confirmation: "password",
+      admin: true
+    },
+
+    {
+      name: "admin2",
+      email: "admin2@test.com",
+      password: "password",
+      password_confirmation: "password",
+      admin: true
+    }
+  ]
+)
