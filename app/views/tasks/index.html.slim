@@ -36,7 +36,7 @@ table.table.table-hover
         td.priority = task.human_attribute_enum(:priority)
         td.labels
           - task.labels.each do |l|
-            = l.name
+            = "#{l.name} "
         td = task.deadline.strftime("%Y-%m-%d")
         td = task.created_at.strftime("%Y-%m-%d")
         td = link_to task_path(task.id), class: 'text-reset', 'data-toggle': "tooltip", 'title': t('common.show')
