@@ -16,7 +16,7 @@ RSpec.describe 'Users', type: :system do
         fill_in 'user[email]', with: 'sampleuser@test.com'
         fill_in 'user[password]', with: 'password'
         fill_in 'user[password_confirmation]', with: 'password'
-        click_on '登録する'
+        click_button '登録する'
         expect(page).to have_content "ユーザー登録が完了しました", "sampleuser@test.com"
       end
 
@@ -33,7 +33,7 @@ RSpec.describe 'Users', type: :system do
         visit new_session_path
         fill_in 'session[email]', with: "admin@example.com"
         fill_in 'session[password]', with: "password"
-        click_on 'ログイン'
+        click_button 'ログイン'
         visit new_user_path
         expect(current_path).to eq user_path(id: 2)
       end
@@ -46,7 +46,7 @@ RSpec.describe 'Users', type: :system do
         visit new_session_path
         fill_in 'session[email]', with: 'admin@example.com'
         fill_in 'session[password]', with: 'password'
-        click_on 'ログイン'
+        click_button 'ログイン'
         expect(current_path).to eq user_path(id: 2)
       end
     end
@@ -57,7 +57,7 @@ RSpec.describe 'Users', type: :system do
       visit new_session_path
       fill_in 'session[email]', with: 'sample1@example.com'
       fill_in 'session[password]', with: 'password'
-      click_on 'ログイン'
+      click_button 'ログイン'
     end
 
     context '自分の詳細画面に飛んだ時' do
@@ -83,7 +83,7 @@ RSpec.describe 'Users', type: :system do
 
     context 'ログアウトボタンを押した時' do
       example 'ログアウト出来る' do
-        click_on 'Logout'
+        click_on 'ログアウト'
         expect(page).to have_content "ログアウトしました"
       end
     end
@@ -94,7 +94,7 @@ RSpec.describe 'Users', type: :system do
       visit new_session_path
       fill_in 'session[email]', with: 'admin@example.com'
       fill_in 'session[password]', with: 'password'
-      click_on 'ログイン'
+      click_button 'ログイン'
     end
 
     context '管理者画面にアクセスした時' do
@@ -111,7 +111,7 @@ RSpec.describe 'Users', type: :system do
         fill_in 'user[email]', with: 'sampleuser2@test.com'
         fill_in 'user[password]', with: 'password'
         fill_in 'user[password_confirmation]', with: 'password'
-        click_on '登録する'
+        click_button '登録する'
         expect(page).to have_content "ユーザーを作成しました"
       end
     end
