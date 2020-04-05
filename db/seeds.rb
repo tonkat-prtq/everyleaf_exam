@@ -18,12 +18,14 @@ end
   )
 end
 
-Label.create(name: "勉強")
-Label.create(name: "料理")
-Label.create(name: "仕事")
+Label.create!(name: "勉強")
+Label.create!(name: "料理")
+Label.create!(name: "仕事")
 
-100.times do |n|
-  Labeling.create!(label_id: rand(1..3), task_id: rand(1..90))
+tasks = Task.all
+
+tasks.each do |task|
+  Labeling.create!(label_id: rand(1..3), task_id: task.id)
 end
 
 User.create!(
