@@ -30,5 +30,10 @@ FactoryBot.define do
     sequence(:deadline) { Time.now - 1.days }
     sequence(:created_at) { Time.now - 2.days }
     user
+
+    after(:create) do |completed_task|
+      # labels = create(:label)
+      create(:labeling, task: completed_task, label: create(:label2))
+    end
   end
 end
